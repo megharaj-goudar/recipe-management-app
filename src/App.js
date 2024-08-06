@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { ApolloProvider } from '@apollo/client'; // Import ApolloProvider here
+import { ApolloProvider } from '@apollo/client';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -10,7 +10,7 @@ import AddEditRecipe from './pages/AddEditRecipe';
 import PrivateRoute from './components/PrivateRoute';
 import { RecipeProvider } from './context/RecipeContext';
 import { AuthProvider } from './context/AuthContext';
-import client from './apolloClient'; // Import Apollo Client instance
+import client from './apolloClient';
 import './App.css';
 import RecipeDetails from './pages/RecipeDetails';
 
@@ -18,7 +18,7 @@ const App = () => {
   return (
     <AuthProvider>
       <RecipeProvider>
-        <ApolloProvider client={client}> {/* Wrap with ApolloProvider */}
+        <ApolloProvider client={client}>
           <Router>
             <Header />
             <Routes>

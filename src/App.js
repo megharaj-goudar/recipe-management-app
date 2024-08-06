@@ -12,6 +12,7 @@ import { RecipeProvider } from './context/RecipeContext';
 import { AuthProvider } from './context/AuthContext';
 import client from './apolloClient'; // Import Apollo Client instance
 import './App.css';
+import RecipeDetails from './pages/RecipeDetails';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
               <Route path="/recipes" element={<PrivateRoute element={Recipes} />} />
               <Route path="/add-recipe" element={<PrivateRoute element={AddEditRecipe} />} />
               <Route path="/edit-recipe/:id" element={<PrivateRoute element={AddEditRecipe} />} />
+              <Route path="/recipe-details/:id" element={<PrivateRoute element={RecipeDetails} />} />
             </Routes>
           </Router>
         </ApolloProvider>

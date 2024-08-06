@@ -11,8 +11,10 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (user) {
       localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', user.token); // Store token in localStorage
     } else {
       localStorage.removeItem('user');
+      localStorage.removeItem('token'); // Remove token from localStorage
     }
   }, [user]);
 
@@ -23,15 +25,17 @@ export const AuthProvider = ({ children }) => {
       body: JSON.stringify({
         query: `
           mutation {
-            login(username: "${username}", password: "${password}")
+            login(username: "${username}", password: "${password}") {
+              token
+            }
           }
         `,
       }),
     });
 
     const result = await response.json();
-    if (result.data && result.data.login) {
-      const token = result.data.login;
+    if (result.data && result.data.login && result.data.login.token) {
+      const token = result.data.login.token;
       setUser({ username, token });
     } else {
       throw new Error('Invalid credentials');

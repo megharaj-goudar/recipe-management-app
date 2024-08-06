@@ -11,11 +11,13 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+
     try {
       await login({ username, password });
       navigate('/recipes');
     } catch (err) {
-      setError('Invalid username or password');
+      setError(err.message || 'Invalid username or password');
     }
   };
 
@@ -26,11 +28,11 @@ const Login = () => {
       <form onSubmit={handleSubmit}>
         <label>
           Username:
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
         </label>
         <label>
           Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         </label>
         <button type="submit">Login</button>
       </form>

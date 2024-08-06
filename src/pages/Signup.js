@@ -24,12 +24,16 @@ const Signup = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           query: `
-            mutation {
-              signup(username: "${formState.username}", password: "${formState.password}") {
+            mutation Signup($username: String!, $password: String!) {
+              signup(username: $username, password: $password) {
                 token
               }
             }
           `,
+          variables: {
+            username: formState.username,
+            password: formState.password,
+          },
         }),
       });
 

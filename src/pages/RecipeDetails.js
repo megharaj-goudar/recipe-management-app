@@ -4,7 +4,7 @@ import { useQuery, gql } from '@apollo/client';
 
 const GET_RECIPE = gql`
   query GetRecipe($id: ID!) {
-    recipe(id: $id) {
+    getRecipe(id: $id) {
       id
       title
       category
@@ -23,7 +23,9 @@ const RecipeDetails = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const recipe = data.recipe;
+  if (!data || !data.getRecipe) return <p>No recipe found</p>;
+
+  const recipe = data.getRecipe;
 
   return (
     <div>
